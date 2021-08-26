@@ -17,6 +17,39 @@ class Chat{
 
 	init(){
 
+		let start_structure = `<div class="settings_wrap">
+									<img src="" alt="" class="avatar">
+									<i class="fas fa-comment-dots"></i>
+									<i class="fas fa-address-book"></i>
+									<i class="fas fa-cog"></i>
+
+									<button class="exit">x</button>
+								</div>
+								<div class="contacts_wrap">
+									
+								</div>
+								<div class="content_wrap">
+									<div class="chat_wrap">
+										<img src="" alt="" class="avatar">
+										<i class="fas fa-paperclip"></i>
+										<div class="chat">
+
+										</div>
+
+										<form action="/" class="msg_form">
+											<textarea name="" id="" cols="30" rows="3"></textarea>
+											<button type="button"><i class="fab fa-telegram-plane"></i></button>
+										</form>
+										
+									</div>
+									<div class="info_wrap">
+										
+									</div>
+								</div>`;
+
+		document.querySelector(".wrap").innerHTML = start_structure;
+
+
 		//this.getRequest();
 		this._msgForm = document.querySelector(".msg_form");
 		this._btnForm = this._msgForm.querySelector("button");
@@ -27,6 +60,16 @@ class Chat{
 			if(msg.value != ""){
 				this.postRequest({"action": "set", "data" : {"id":1, "author": "Илья", "content": msg.value}});
 			}
+		})
+
+		let exit = document.querySelector(".settings_wrap .exit");
+
+		
+		exit.addEventListener("click", function(){
+			localStorage.removeItem('tooken');
+			
+			let user = new Users();
+			user.render();
 		})
 	}
 

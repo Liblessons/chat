@@ -6,7 +6,7 @@ class Users{
 	_requestURL = "https://liblessons.ru/ajax/chat/";
 
 	constructor(){
-		this.init();
+		
 	}
 
 	init(){
@@ -26,7 +26,11 @@ class Users{
 		let authorization_btn = this._windowEl.querySelector(".authorization_btn");
 		authorization_btn.addEventListener("click", (evt)=>{
 			evt.preventDefault();
-			this.authorization();
+
+
+			let user = this.authorization();
+			
+
 		})
 	}
 
@@ -85,7 +89,45 @@ class Users{
 			let data = await response.json(); // читаем ответ в формате JSON
 
 			console.log(data);
+
+			localStorage.setItem('tooken', data.tooken);
+			console.log(localStorage.getItem('tooken'));
+			
+			if("tooken" in data){
+				
+				// отрисовываем чат
+				new Chat();
+
+			}
 		}
+	}
+
+	render(){
+		let start_structure = `<div class="wrap_window">
+									<div class="window">
+										<div class="authorization">
+											<h2>Liblessons <span>Chat</span></h2>
+											<img src="images/default.svg">
+											<h3>Вход</h3>
+											<form id="authorization_form">
+												<input type="email" name="email" placeholder="e-mail" value="ipoletuev@mail.ru">
+												<input type="pass" name="pass" placeholder="pass" value="123">
+												<button class="authorization_btn" type="button">Войти</button>
+											</form>
+											<p>Нет учётной записи? нажмите 
+											<span class="btn">Зарегистрироваться</span></p>
+										</div>
+										<div class="registration">
+											<h2>Liblessons <span>Chat</span></h2>
+											<h3>Регистрация</h3>
+
+											<p>Уже есть учётная запись? нажмите 
+											<span class="btn" type="button">Войти</span></p>
+										</div>
+									</div>
+								</div>`;
+
+		document.querySelector(".wrap").innerHTML = start_structure;
 	}
 
 	validation(){

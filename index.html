@@ -20,8 +20,8 @@
 					<img src="images/default.svg">
 					<h3>Вход</h3>
 					<form id="authorization_form">
-						<input type="email" name="email" placeholder="e-mail">
-						<input type="pass" name="pass" placeholder="pass">
+						<input type="email" name="email" placeholder="e-mail" value="ipoletuev@mail.ru">
+						<input type="pass" name="pass" placeholder="pass" value="123">
 						<button class="authorization_btn" type="button">Войти</button>
 					</form>
 					<p>Нет учётной записи? нажмите 
@@ -83,8 +83,12 @@
 */
 		//let chat = new Chat();
 		let user = new Users();
+		user.init();
+		if(localStorage.getItem('tooken')){
+			new Chat();
+		}
 
-		
+
 
 	</script>
 </body>
